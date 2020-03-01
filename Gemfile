@@ -1,14 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.6'
-<<<<<<< HEAD
 gem 'bcrypt',         '3.1.12'
 gem 'bootstrap-sass', '3.4.1'
-gem 'puma',         '3.9.1'
-=======
-gem 'bootstrap-sass', '3.4.1'
 gem 'puma',         '3.12.3'
->>>>>>> 80ed6cda0f7975fc1ef942f86d29a67496a6bca6
 gem 'sass-rails',   '5.0.6'
 gem 'uglifier',     '3.2.0'
 gem 'coffee-rails', '4.2.2'
