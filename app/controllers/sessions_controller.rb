@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   
   # /login
   def new
-    render 'new'
   end
   
   # /login
@@ -13,8 +12,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # ログインする
       log_in user
-      # 成功メッセージを表示する
-      flash[:success] = "Welcome to the Sample App!"
+      # チェックボックスがオンの時に「1」、オフの時に「0」になる
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       redirect_to user
     else
@@ -28,7 +27,7 @@ class SessionsController < ApplicationController
   # /logout
   def destroy
     # ログアウトする
-    log_out
+    log_out if logged_in?
     # トップページに戻る
     redirect_to root_url
   end
