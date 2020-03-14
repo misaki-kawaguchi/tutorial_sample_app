@@ -5,11 +5,16 @@ module SessionsHelper
     session[:user_id] = user.id
   end
   
-  # ユーザーのセッションを永続的にする
+  # ユーザーのセッションを永続的に記録する
   def remember(user)
     user.remember # => DB: remember_digest 
     cookies.permanent.signed[:user_id] = user.id # permanent(永続的に保存)  #signed(暗号化)
     cookies.permanent[:remember_token] = user.remember_token
+  end
+  
+  #渡されたユーザーがログイン済であればtrueを返す
+  def current_user?(user)
+    user == current_user
   end
 
   # 記憶トークンcookieに対応するユーザーを返す
@@ -44,5 +49,16 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
+  end
+  
+  # 記憶したURL (もしくはデフォルト値) にリダイレクト
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  # アクセスしようとしたURLを覚えておく
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end

@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
       log_in user
       # チェックボックスがオンの時に「1」、オフの時に「0」になる
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      # ユーザーログイン後にユーザー情報のページにリダイレクトする
-      redirect_to user
+      #サインイン成功後にリダイレクトする
+      redirect_back_or user
     else
       # エラーメッセージを表示する
       flash.now[:danger] = 'Invalid email/password combination'

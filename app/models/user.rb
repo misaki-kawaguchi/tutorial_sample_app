@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # パスワードをハッシュ化して保存する
   has_secure_password
   # パスワードは最小6文字、空白はエラー
-  validates :password, presence: true, length: {minimum: 6 }
+  validates :password, presence: true, length: {minimum: 6 }, allow_nil: true
   
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
