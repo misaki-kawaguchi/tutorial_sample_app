@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   
   #アカウント有効化
   resources :account_activations, only: [:edit]
+  
+  # パスワード再設定
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end
